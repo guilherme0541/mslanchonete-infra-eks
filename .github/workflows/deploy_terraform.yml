@@ -17,6 +17,11 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
