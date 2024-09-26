@@ -9,18 +9,18 @@ terraform {
 module "mslanchonete" {
   source = "./infra"
 
-  project_name     = var.projectname
-  region = var.aws_region
+  project_name = var.projectname
+  region       = var.aws_region
 }
 
 variable "aws_region" {
-  type = string
+  type        = string
   default     = "us-east-1"
   description = "AWS region"
 }
 
 variable "projectname" {
-  type = string
-  default = "mslanchonete"
+  type        = string
+  default     = "mslanchonete"
   description = "Application Name"
 }
