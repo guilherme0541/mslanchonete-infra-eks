@@ -32,11 +32,10 @@ jobs:
     - name: Terraform fmt
       run: terraform fmt -recursive
         
-    - name: Terraform Init
-      run: terraform init
-
-    - name: Terraform Plan
-      run: terraform plan
+    - name: Terraform plan
+      run: |
+        terraform init
+        terraform plan
     
     - name: Terraform Apply
       run: terraform apply -var='aws_region=${{ vars.AWS_REGION }}' --auto-approve
