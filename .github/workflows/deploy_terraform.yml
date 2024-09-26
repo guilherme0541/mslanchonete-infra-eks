@@ -31,10 +31,7 @@ jobs:
       run: terraform init
 
     - name: Terraform plan
-      run: terraform plan
-    
-    - name: Terraform Apply
-      run: terraform apply -var='aws_region=${{ vars.AWS_REGION }}' --auto-approve
+      run: terraform plan -var='aws_region=${{ vars.AWS_REGION }}'
 
   deploy:
     name: Deploy
