@@ -1,11 +1,19 @@
-name: Deploy terraform
+name: Destroy terraform
 
 on:
   workflow_dispatch:
+    inputs:
+      action:
+        description: 'Destroy resources?'
+        type: choice
+        options:
+        - yes_sure
+        - God_forbid
 
 jobs:
-  deploy:
-    name: Deploy
+  destroy:
+    name: Destroy
+    if: ${{ github.event.inputs.action == 'yes_sure' }}
     runs-on: ubuntu-latest
 
     steps:
