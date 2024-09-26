@@ -7,13 +7,13 @@ on:
         description: 'Destroy resources?'
         type: choice
         options:
-        - yes_shure
-        - No_OMG
+        - yes_sure
+        - God_forbid
 
 jobs:
   destroy:
     name: Destroy
-    if: ${{ github.event.inputs.action == 'yes_shure' }}
+    if: ${{ github.event.inputs.action == 'yes_sure' }}
     runs-on: ubuntu-latest
 
     steps:
