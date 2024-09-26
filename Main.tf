@@ -9,7 +9,7 @@ terraform {
 module "mslanchonete" {
   source = "./infra"
 
-  project_name     = var.projectname
+  project_name = var.projectname
   region = var.aws_region
 }
 
