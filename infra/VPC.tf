@@ -22,14 +22,17 @@ module "vpc" {
   private_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 4, k)]
   private_subnet_tags = {
     type = "private"
+    "kubernetes.io/role/internal-elb" = 1
   }
 
   public_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 4, k + 2)]
   public_subnet_tags = {
     type = "public"
+    "kubernetes.io/role/elb" = 1
   }
 
   enable_nat_gateway = true
+  single_nat_gateway = true
 
   tags = {
     Name = local.vpc_name
