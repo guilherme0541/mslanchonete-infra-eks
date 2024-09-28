@@ -10,6 +10,9 @@ module "eks_cluster" {
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
 
+  create_kms_key              = false
+  create_cloudwatch_log_group = false
+
    cluster_addons = {
      coredns = {
      most_recent = true
