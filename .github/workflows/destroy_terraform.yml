@@ -27,11 +27,17 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ vars.AWS_REGION }}
         
-    - name: Terraform fmt
-      run: terraform fmt -recursive
+    - name: Destroy alb controller
+      run: |
+        cd albController
+        terraform fmt -recursive
+        terraform init
+        terraform destroy -var='aws_region=${{ vars.AWS_REGION }}' --auto-approve
         
-    - name: Terraform init
-      run: terraform init
-    
-    - name: Terraform Destroy
-      run: terraform destroy -var='aws_region=${{ vars.AWS_REGION }}' --auto-approve
+    - name: Destroy infra and cluster eks
+      run: |
+        cd ../eks
+        terraform fmt -recursive
+        terraform init
+        terraform destroy -var='aws_region=${{ vars.AWS_REGION }}' --auto-approve
+
