@@ -36,7 +36,7 @@ jobs:
         
     - name: Destroy infra and cluster eks
       run: |
-        cd ../eks
+        cd eks
         terraform fmt -recursive
         terraform init
         terraform destroy -var='aws_region=${{ vars.AWS_REGION }}' --auto-approve
