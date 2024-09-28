@@ -31,12 +31,12 @@ jobs:
         terraform init
         terraform plan -var='aws_region=${{ vars.AWS_REGION }}'
 
-    - name: Plan alb controller
+    - name: Validate alb controller
       run: |
         cd albController
         terraform fmt -recursive
         terraform init
-        terraform plan -var='aws_region=${{ vars.AWS_REGION }}'
+        terraform validate
 
   deploy:
     name: Deploy
@@ -64,7 +64,7 @@ jobs:
 
     - name: Apply alb controller
       run: |
-        cd ../albController
+        cd albController
         terraform fmt -recursive
         terraform init
         terraform apply -var='aws_region=${{ vars.AWS_REGION }}' --auto-approve

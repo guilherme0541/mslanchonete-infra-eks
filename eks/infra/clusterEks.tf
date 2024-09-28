@@ -10,6 +10,18 @@ module "eks_cluster" {
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
 
+   cluster_addons = {
+     coredns = {
+     most_recent = true
+     }
+     kube-proxy = {
+     most_recent = true
+     }
+     vpc-cni = {
+     most_recent = true
+     }
+ }
+
   eks_managed_node_group_defaults = {
     instance_types = ["t2.micro"]
   }
