@@ -10,22 +10,38 @@ module "eks_cluster" {
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
 
+   cluster_addons = {
+     coredns = {
+     most_recent = true
+     }
+     kube-proxy = {
+     most_recent = true
+     }
+     vpc-cni = {
+     most_recent = true
+     }
+ }
+
+  eks_managed_node_group_defaults = {
+    instance_types = ["t2.micro"]
+  }
+
   eks_managed_node_groups = {
     one = {
       name                   = "node-group-1"
-      min_size               = 1
-      max_size               = 3
-      desired_size           = 1
-      vpc_security_group_ids = [aws_security_group.ssh_cluster.id]
+      min_size               = 2
+      max_size               = 4
+      desired_size           = 2
+      vpc_security_group_ids = [aws_security_group.cluster.id]
       instance_types         = ["t2.micro"]
     }
 
     two = {
       name                   = "node-group-2"
-      min_size               = 1
-      max_size               = 3
-      desired_size           = 1
-      vpc_security_group_ids = [aws_security_group.ssh_cluster.id]
+      min_size               = 2
+      max_size               = 4
+      desired_size           = 2
+      vpc_security_group_ids = [aws_security_group.cluster.id]
       instance_types         = ["t2.micro"]
     }
   }

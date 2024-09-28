@@ -24,14 +24,19 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ vars.AWS_REGION }}
         
-    - name: Terraform fmt
-      run: terraform fmt -recursive
-        
-    - name: Terraform init
-      run: terraform init
+    - name: Plan infra and cluster eks
+      run: |
+        cd eks
+        terraform fmt -recursive
+        terraform init
+        terraform plan -var='aws_region=${{ vars.AWS_REGION }}'
 
-    - name: Terraform plan
-      run: terraform plan -var='aws_region=${{ vars.AWS_REGION }}'
+    - name: Validate alb controller
+      run: |
+        cd albController
+        terraform fmt -recursive
+        terraform init
+        terraform validate
 
   deploy:
     name: Deploy
@@ -49,12 +54,17 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ vars.AWS_REGION }}
-        
-    - name: Terraform fmt
-      run: terraform fmt -recursive
-        
-    - name: Terraform init
-      run: terraform init
-    
-    - name: Terraform Apply
-      run: terraform apply -var='aws_region=${{ vars.AWS_REGION }}' --auto-approve
+
+    - name: Apply infra and cluster eks
+      run: |
+        cd eks
+        terraform fmt -recursive
+        terraform init
+        terraform apply -var='aws_region=${{ vars.AWS_REGION }}' --auto-approve
+
+    - name: Apply alb controller
+      run: |
+        cd albController
+        terraform fmt -recursive
+        terraform init
+        terraform apply -var='aws_region=${{ vars.AWS_REGION }}' --auto-approve
