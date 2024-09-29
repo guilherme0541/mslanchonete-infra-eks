@@ -41,3 +41,8 @@ jobs:
         terraform init
         terraform destroy -var='aws_region=${{ vars.AWS_REGION }}' --auto-approve
 
+    - name: Destroy IRSA iam role
+      run: |
+        aws iam delete-role-policy --role-name IRSA-EKSLoadBalancerControllerRole --policy-name AWSLoadBalancerControllerIAMPolicy
+        aws iam delete-role --role-name IRSA-EKSLoadBalancerControllerRole
+
