@@ -1,7 +1,8 @@
 # mssistemalanchonete : Infra EKS
 
 Este repositório serve para automatizar o provisionamento de infraestrura para o [mssistemalanchonete](https://github.com/kelvinlins/mssistemalanchonete.git) utilizando terraform.   
-Através dele pode ser privisionado um cluster EKS, VPC, grupos de segurança, um repositório ecr para a aplicação e prepara a integração entre o kubernetes do cluster e o load balancer que será criado para a aplicação.
+Através dele pode ser privisionado um cluster EKS, VPC, grupos de segurança, um repositório ecr para a aplicação e prepara a integração entre o kubernetes do cluster e o load balancer que será criado para a aplicação.   
+Para executar esses scripts você precisa de um bucket s3 que é usado como [backend](https://developer.hashicorp.com/terraform/language/backend) pelo terraform. Antes de executar crie o bucket e configure o backend no `Main.tf`nas pastas `eks e albController`.
 
 ## Executando via github-actions
 Para executar os scripts diretamente do github, é necessário criar a variable `AWS_REGION` que é o código da região AWS e  as secrets `AWS_ACCESS_KEY_ID e AWS_SECRET_ACCESS_KEY`, respectivamente o código da região AWS, o ID e chave de acesso de um usuário AWS com permissões suficientes para criar e alterar os recursos citados acima.   
