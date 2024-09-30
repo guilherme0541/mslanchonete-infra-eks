@@ -4,7 +4,7 @@ Este repositório serve para automatizar o provisionamento de infraestrura para 
 Através dele pode ser privisionado um cluster EKS, VPC, grupos de segurança, um repositório ecr para a aplicação e prepara a integração entre o kubernetes do cluster e o load balancer que será criado para a aplicação.
 
 ## Executando via github-actions
-Para executar os scripts diretamente do github, é necessário criar as secrets  `AWS_REGION, AWS_ACCESS_KEY_ID e AWS_SECRET_ACCESS_KEY`, respectivamente o código da região AWS, o ID e chave de acesso de um usuário AWS com permissões suficientes para criar e alterar os recursos citados acima.   
+Para executar os scripts diretamente do github, é necessário criar a variable `AWS_REGION` que é o código da região AWS e  as secrets `AWS_ACCESS_KEY_ID e AWS_SECRET_ACCESS_KEY`, respectivamente o código da região AWS, o ID e chave de acesso de um usuário AWS com permissões suficientes para criar e alterar os recursos citados acima.   
 A automação ( **Deploy terraform** ) roda a partir de pull-requests para a `main`: na abertura ela valida os scripts, no merge ela aplica as alterações a infra. Também é possivel acionar a automação manualmente no menu action do github.
 Para fazer o desprovisionamento da infra também existe uma action nesse repositório: **Deploy terraform**. Ela precisa ser acionada manualmente e escolhendo "Yes_sure" mo menu suspenso o processo é iniciado.
 
